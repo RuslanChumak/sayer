@@ -1,25 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ItemsList from './components/ItemsList';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import CreateItem from './components/CreateItem';
+import ShowItem from './components/ShowItem';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="container">
+        <Switch>
+          <Route path="/item/:id" children={<ShowItem />}>
+          
+          </Route>
+          <Route path="/create-item">
+            <div className="header-create">    
+                <Link className="in" to="/">Back</Link>
+                <h4 className="in">Create new item</h4>
+            </div>
+            <CreateItem />
+          </Route>
+          <Route path="/">
+            <div className="header">
+              <h2>Sayer</h2>
+              <p>World's most used time waster</p>
+            </div>
+            <ItemsList />
+            <div className="block">
+            <Link className="btn-create"  to="/create-item">Create Item</Link>
+            </div>
+          </Route>
+          
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
